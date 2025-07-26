@@ -1,0 +1,4 @@
+user-agent: *
+
+disallow: README.md
+disallow: CNAME 
