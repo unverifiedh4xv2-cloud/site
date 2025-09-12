@@ -4,147 +4,187 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>teamj00rkidd</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    :root {
+      --bg: #0F0F0F;
+      --bg-alt: #1A1A1A;
+      --text: #EAEAEA;
+      --text-muted: #888888;
+      --accent: #4AE8FF;
+      --accent-hover: #3CCAD4;
+      --border: #2A2A2A;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: 'JetBrains Mono', monospace;
-      background: #0a0a0a;
-      color: #d0ffd6;
+      padding: 0;
     }
 
-    a {
-      color: #67f2b8;
-      text-decoration: none;
-    }
-
-    a:hover {
-      color: #ff5fc1;
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
     }
 
     .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
+      width: 100%;
+      max-width: 800px;
     }
 
     header {
-      border-bottom: 1px solid #1a1a1a;
-      padding-bottom: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
+      text-align: center;
     }
 
-    h1 {
-      font-size: 2.4rem;
-      margin-bottom: 0.2rem;
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--accent);
     }
 
-    .sub {
-      color: #666;
-      font-size: 0.95rem;
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: var(--text-muted);
     }
 
     nav {
-      margin-top: 1rem;
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
     }
 
     nav a {
-      margin-right: 1.2rem;
-      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
     }
 
-    .section {
-      background: #111;
-      border: 1px solid #1f1f1f;
-      border-radius: 6px;
-      padding: 1.5rem;
+    nav a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    section {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
       margin-bottom: 2rem;
     }
 
-    .section h2 {
-      margin-top: 0;
-      font-size: 1.3rem;
-      color: #fff;
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
     }
 
-    .section p {
-      font-size: 0.9rem;
-      color: #c4c4c4;
+    section p {
+      font-size: 1rem;
+      color: var(--text-muted);
     }
 
-    ul {
-      list-style: square;
-      padding-left: 1.2rem;
+    ul.features {
+      list-style: none;
+      padding-left: 0;
     }
 
-    li {
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
+    ul.features li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    ul.features li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
     }
 
     .btn {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 0.45rem 1rem;
-      background: #ff5fc1;
-      color: #fff;
-      font-weight: bold;
-      border-radius: 4px;
-      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 5px;
+      text-decoration: none;
       transition: background 0.2s;
     }
 
     .btn:hover {
-      background: #ff81cf;
+      background: var(--accent-hover);
     }
 
     footer {
+      margin-top: auto;
+      padding: 2rem 0;
       text-align: center;
-      font-size: 0.8rem;
-      color: #555;
-      margin-top: 4rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
     }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>teamj00rkidd</h1>
-      <p class="sub">roblox exploit dev | youtube stuff | lua rat enjoyer</p>
+      <p>roblox exploit dev / lua backdoors / script dev</p>
       <nav>
+        <a href="#about">about</a>
         <a href="#projects">projects</a>
-        <a href="https://www.youtube.com/@teamj00rkidd" target="_blank">youtube</a>
         <a href="https://discord.gg/4tGJnwmYd5" target="_blank">discord</a>
+        <a href="https://www.youtube.com/@teamj00rkidd" target="_blank">youtube</a>
       </nav>
     </header>
 
-    <div class="section" id="about">
-      <h2>what's this</h2>
+    <section id="about">
+      <h2>about me</h2>
       <p>
-        just a little personal site for dumping random roblox tools, updates, and other junk.
-        no bs. no filler. if you know, you know.
+        I build backdoors, custom scripts, and tools inside Roblox Studio. No fluff. Just code. My work’s all self-made and always evolving.
       </p>
-    </div>
+    </section>
 
-    <div class="section" id="projects">
-      <h2>stuff i've made</h2>
-      <ul>
-        <li><b>custom executor UI</b> – simple, fast, no bloat. looks clean af.</li>
-        <li><b>script auto-loader</b> – auto-pulls scripts from github/raw links, zero delay.</li>
-        <li><b>discord auth panel</b> – locked behind guild or role. clean af.</li>
-        <li><b>obfuscator (basic)</b> – enough to make skids cry, not enough to fool a real dev.</li>
+    <section id="projects">
+      <h2>recent work</h2>
+      <ul class="features">
+        <li>lua backdoor loader — stealthy, reliable</li>
+        <li>custom script library — organized & versioned</li>
+        <li>anti‑detection utilities & exploit bypass tools</li>
       </ul>
-      <a class="btn" href="https://www.youtube.com/@teamj00rkidd" target="_blank">watch my vids</a>
-    </div>
-
-    <div class="section" id="contact">
-      <h2>discord</h2>
-      <p>main hub for scripts, support, and updates:</p>
-      <a class="btn" href="https://discord.gg/4tGJnwmYd5" target="_blank">join the server</a>
-    </div>
+      <a class="btn" href="https://www.youtube.com/@teamj00rkidd" target="_blank">see on youtube</a>
+    </section>
 
     <footer>
-      &copy; 2025 teamj00rkidd. made in notepad like a real chad.
+      &copy; 2025 teamj00rkidd — made real, not AI.
     </footer>
   </div>
 </body>
