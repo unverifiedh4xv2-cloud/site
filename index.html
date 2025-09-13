@@ -15,100 +15,99 @@
   <meta name="description" content="team j00rkidd — custom exploit loaders · stealth Lua backdoors · script engineering" />
   <meta name="theme-color" content="#b31b1b" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@300;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@300;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{--bg:#070607;--panel:#0f0f10;--muted:#9aa0a6;--text:#f3f6f8;--crimson:#b31b1b;--accent:#ff4e6e;--glass:rgba(255,255,255,0.03)}
+    :root{--bg:#0b0b0b;--text:#eaf2f8;--muted:#9aa0a6;--accent:#ff4e6e;--crimson:#b31b1b}
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
-    body{font-family:Inter,system-ui,Arial,Helvetica;background:linear-gradient(180deg,#050405 0%,#0b0b0c 100%);color:var(--text);-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;padding:48px}
-    .wrap{width:100%;max-width:1100px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));border-radius:14px;padding:32px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(0,0,0,0.6)}
-    header{display:flex;align-items:center;gap:20px}
-    .logo{width:88px;height:88px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;letter-spacing:0.6px;background:linear-gradient(135deg,var(--crimson),#ff6b8a);color:#0b0b0c}
-    h1{font-size:34px;line-height:1;margin:0}
-    .tag{color:var(--muted);margin-top:6px}
-    nav{margin-left:auto;display:flex;gap:12px}
-    a.nav{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;border:1px solid transparent}
-    a.nav:hover{color:var(--crimson);border-color:rgba(179,27,27,0.12)}
+    body{font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#050506 0%,#0c0c0d 100%);color:var(--text);-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;padding:48px}
+    .wrap{width:100%;max-width:820px}
+    .ghost{background:transparent;border-radius:10px;padding:26px;border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)}
 
-    .layout{display:grid;grid-template-columns:1fr 320px;gap:22px;margin-top:22px}
-    .panel{background:var(--panel);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
-    .hero{display:flex;flex-direction:column;gap:14px}
-    .meta-line{display:flex;gap:12px;align-items:center;color:var(--muted);font-family:JetBrains Mono,monospace}
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--crimson),#ff6b8a);color:#fff;font-weight:800;text-decoration:none}
-    .features{margin-top:12px;list-style:none;padding-left:0}
-    .features li{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
-    .small{font-size:13px;color:var(--muted)}
-    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+    header{display:flex;align-items:center;gap:18px}
+    .avatar{width:84px;height:84px;border-radius:10px;background:linear-gradient(135deg,var(--crimson),#ff6b8a);display:flex;align-items:center;justify-content:center;font-weight:800;color:#070707;font-size:22px}
+    h1{font-size:28px;margin:0}
+    .subtitle{color:var(--muted);margin-top:6px}
 
-    /* card preview for embed-like feel inside site */
-    .preview{background:linear-gradient(180deg,#0b0b0c 0%,#0e0e10 100%);padding:16px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-    .preview h4{margin:0;font-size:16px}
-    .preview p{margin-top:6px;color:var(--muted)}
+    nav{margin-left:auto;display:flex;gap:10px}
+    a.link{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;font-weight:600}
+    a.link:hover{color:var(--accent)}
 
-    @media(max-width:920px){.layout{grid-template-columns:1fr}.logo{width:68px;height:68px}}
-    @media(max-width:520px){body{padding:20px}.card{padding:18px}.logo{display:none}}
+    main{display:grid;grid-template-columns:1fr 260px;gap:18px;margin-top:22px}
+    .panel{background:transparent;border-radius:8px;padding:14px}
+    .card{background:rgba(255,255,255,0.02);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+
+    .list{list-style:none;padding-left:0;margin-top:8px}
+    .list li{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.02);color:var(--text)}
+    .meta{font-family:JetBrains Mono,monospace;color:var(--muted);font-size:13px}
+
+    footer{margin-top:20px;color:var(--muted);font-size:13px;text-align:center}
+
+    @media(max-width:780px){main{grid-template-columns:1fr}.avatar{width:64px;height:64px}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card">
+    <div class="ghost">
       <header>
-        <div class="logo">j00r</div>
+        <div class="avatar">j00r</div>
         <div>
           <h1>team j00rkidd</h1>
-          <div class="tag">custom exploit loaders · stealth Lua backdoors · script engineering</div>
+          <div class="subtitle">custom exploit loaders · stealth Lua backdoors · script engineering</div>
         </div>
+
         <nav>
-          <a class="nav" href="#about">about</a>
-          <a class="nav" href="#releases">releases</a>
-          <a class="nav" href="https://discord.gg/4tGJnwmYd5" target="_blank">discord</a>
-          <a class="nav" href="https://www.youtube.com/@teamj00rkidd" target="_blank">youtube</a>
+          <a class="link" href="#about">about</a>
+          <a class="link" href="#projects">projects</a>
+          <a class="link" href="https://discord.gg/4tGJnwmYd5" target="_blank">discord</a>
+          <a class="link" href="https://www.youtube.com/@teamj00rkidd" target="_blank">youtube</a>
         </nav>
       </header>
 
-      <section class="layout">
-        <main>
-          <article class="panel hero">
-            <div class="meta-line">
-              <span class="small">latest</span>
-              <strong style="margin-left:6px">lua_backdoor_v2 — stable</strong>
-            </div>
+      <main>
+        <section>
+          <div class="card">
+            <h3 class="meta">About</h3>
+            <p style="margin-top:8px;color:var(--muted)">Full-stack exploit dev focused on Roblox tooling, loader automation, and anti-detection research. I ship practical tools — no fluff.</p>
 
-            <h2 style="margin-top:4px">what i build</h2>
-            <p class="small">I write and maintain custom loaders, script libraries, and obfuscation layers. Everything is hand-built, versioned, and tested in private lab environments.</p>
-
-            <ul class="features" aria-live="polite">
-              <li>loader — stealthy startup & auto-update</li>
-              <li>library — modular scripts, semantic versioning</li>
-              <li>anti-detection — sandbox & pattern bypass research</li>
+            <h3 style="margin-top:12px" class="meta">Things I use</h3>
+            <ul class="list">
+              <li>▹ Lua (Roblox)</li>
+              <li>▹ Node.js / Fastify</li>
+              <li>▹ Docker / CI</li>
+              <li>▹ Git + versioning</li>
+              <li>▹ Private testbeds</li>
             </ul>
 
-            <a class="btn" href="https://www.youtube.com/@teamj00rkidd" target="_blank">see releases</a>
-
-            <div style="margin-top:14px" class="small">Want your own site preview image? Add <code>/preview.png</code> at the root (1200×630 px). I can make one for you.</div>
-          </article>
-        </main>
-
-        <aside class="panel">
-          <div class="preview">
-            <h4>site preview</h4>
-            <p>Drop <code>https://j00rkidd.xyz</code> into Discord / Telegram to show this card with the preview image.</p>
+            <h3 style="margin-top:12px" class="meta">Latest</h3>
+            <ul class="list">
+              <li>lua_backdoor_v2 — stable</li>
+              <li>loader — auto-update & staging</li>
+              <li>obfs — improved signature randomization</li>
+            </ul>
           </div>
+        </section>
 
-          <div style="margin-top:14px">
-            <h4 style="margin:0">contact</h4>
-            <p class="small" style="margin-top:8px">discord: <strong>discord.gg/4tGJnwmYd5</strong></p>
-            <p class="small" style="margin-top:8px">youtube: <strong>@teamj00rkidd</strong></p>
+        <aside>
+          <div class="card">
+            <h3 class="meta">Projects</h3>
+            <ul class="list">
+              <li><a href="https://exoliner.wtf" target="_blank" style="color:var(--text);text-decoration:none">Exoliner — serverside</a></li>
+              <li><a href="https://psx.lennyy1337.dev" target="_blank" style="color:var(--text);text-decoration:none">PortScan-X — tooling</a></li>
+              <li><strong style="color:var(--muted)">j00rkidd-loader</strong></li>
+            </ul>
+
+            <h3 class="meta" style="margin-top:10px">Socials</h3>
+            <p class="meta" style="margin-top:6px">Discord · <a href="https://discord.gg/4tGJnwmYd5" target="_blank" style="color:var(--text);text-decoration:none">Join</a></p>
+            <p class="meta" style="margin-top:6px">YouTube · <a href="https://www.youtube.com/@teamj00rkidd" target="_blank" style="color:var(--text);text-decoration:none">@teamj00rkidd</a></p>
+            <p class="meta" style="margin-top:6px">GitHub · <a href="https://github.com/j00rkidd" target="_blank" style="color:var(--text);text-decoration:none">github.com/j00rkidd</a></p>
           </div>
-
-          <div style="margin-top:14px" class="small">© 2025 team j00rkidd — built by hand</div>
         </aside>
-      </section>
+      </main>
 
       <footer>
-        <span class="small">Note: For social embeds, make sure <code>https://j00rkidd.xyz/preview.png</code> is present and the site is served over HTTPS.</span>
+        <div class="meta">© 2025 team j00rkidd — built by hand</div>
       </footer>
     </div>
   </div>
