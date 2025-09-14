@@ -1,121 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>team j00rkidd</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>team j00rkidd — roblox exploit dev</title>
 
-<!-- Open Graph for social embeds -->
+<!-- Open Graph -->
 <meta property="og:title" content="team j00rkidd" />
 <meta property="og:description" content="roblox exploit dev · lua backdoors · script dev" />
 <meta property="og:url" content="https://j00rkidd.xyz" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://j00rkidd.xyz/preview.png" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg: #0F0F0F;
-  --bg-alt: #1A1A1A;
-  --text: #EAEAEA;
-  --text-muted: #888888;
-  --accent: #FF4E6E;
-  --accent-hover: #FF6B8A;
-  --border: #2A2A2A;
+:root{
+  --bg: #0b0b0c;
+  --panel: rgba(255,255,255,0.03);
+  --muted: #9aa0a6;
+  --text: #edf0f2;
+  --crimson: #C92A2A; /* crimson accent */
+  --crimson-2: #E84444;
+  --border: rgba(255,255,255,0.04);
+  --glass: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  --radius: 12px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 1rem;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  min-height:100%;
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  background: radial-gradient(1200px 400px at 10% 10%, rgba(201,42,42,0.06), transparent 8%),
+              radial-gradient(900px 300px at 90% 90%, rgba(232,68,68,0.03), transparent 6%),
+              var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  padding:2rem 1rem;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
 }
-.container { width: 100%; max-width: 800px; }
 
-header { margin-bottom: 3rem; text-align: center; }
-header h1 { font-size: 2.5rem; font-weight: 600; color: var(--accent); }
-header p { margin-top: 0.5rem; font-size: 1rem; color: var(--text-muted); }
-
-nav { margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem; }
-nav a {
-  color: var(--text);
-  font-weight: 500;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border: 1px solid transparent;
-  transition: border-color 0.2s, color 0.2s;
+/* container */
+.container{
+  width:100%;
+  max-width:1000px;
+  display:grid;
+  gap:1.5rem;
+  grid-template-columns: 1fr 320px;
+  align-items:start;
 }
-nav a:hover { color: var(--accent); border-color: var(--accent); }
 
-section { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
-section h2 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text); }
-section p { font-size: 1rem; color: var(--text-muted); }
-
-ul.features { list-style: none; padding-left: 0; margin-top: 1rem; }
-ul.features li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; font-size: 1rem; color: var(--text); }
-ul.features li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
-
-.btn {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.6rem 1.2rem;
-  background: var(--accent);
-  color: var(--bg);
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background 0.2s;
+/* single-column on small screens */
+@media (max-width:880px){
+  .container{grid-template-columns:1fr}
 }
-.btn:hover { background: var(--accent-hover); }
 
-footer { margin-top: auto; padding: 2rem 0; text-align: center; font-size: 0.85rem; color: var(--text-muted); }
+/* skip link for accessibility */
+.skip-link{
+  position: absolute;
+  left: -999px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+.skip-link:focus{
+  left:1rem;
+  top:1rem;
+  width:auto;
+  height:auto;
+  padding:.5rem .75rem;
+  background:var(--panel);
+  border-radius:6px;
+  border:1px solid var(--border);
+}
 
-@media (max-width: 600px) {
-  header h1 { font-size: 2rem; }
-  nav { flex-direction: column; gap: 1rem; }
+/* header / hero */
+.header{
+  grid-column: 1 / -1;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1rem;
+  border-radius:var(--radius);
+  background:var(--glass);
+  border:1px solid var(--border);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+}
+.logo {
+  width:84px;
+  height:84px;
+  flex:0 0 84px;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--crimson),var(--crimson-2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  color:white;
+  font-family:"Fira Mono", monospace;
+  font-size:22px;
+  letter-spacing:1px;
+  user-select:none;
+  box-shadow:0 6px 18px rgba(201,42,42,0.12), inset 0 -6px 18px rgba(0,0,0,0.15);
+}
+.header-main{flex:1}
+.header-main h1{
+  margin:0;
+  font-size:1.4rem;
+  letter-spacing:0.6px;
+}
+.header-main p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:0.95rem;
+}
+
+/* nav */
+.nav{
+  display:flex;
+  gap:.5rem;
+  margin-top:.6rem;
+  flex-wrap:wrap;
+}
+.nav a{
+  text-decoration:none;
+  color:var(--text);
+  font-weight:600;
+  padding:.45rem .75rem;
+  border-radius:8px;
+  border:1px solid transparent;
+  background:transparent;
+  transition:all .18s;
+  font-size:0.92rem;
+}
+.nav a:hover, .nav a:focus{
+  background:rgba(255,255,255,0.02);
+  border-color: rgba(201,42,42,0.12);
+  color:var(--crimson-2);
+  outline:none;
+}
+
+/* left column */
+.panel{
+  background:var(--panel);
+  border-radius:12px;
+  padding:1.25rem;
+  border:1px solid var(--border);
+}
+
+/* about */
+.about h2{margin:0 0 .5rem 0}
+.about p{color:var(--muted)}
+
+/* projects */
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1rem;
+  margin-top:1rem;
+}
+@media (max-width:620px){
+  .projects-grid{grid-template-columns:1fr}
+}
+.project{
+  padding:0.9rem;
+  border-radius:10px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+  border:1px solid rgba(255,255,255,0.02);
+  transition:transform .18s, box-shadow .18s;
+}
+.project h3{margin:0 0 .35rem 0;font-size:1rem}
+.project p{margin:0;color:var(--muted);font-size:.9rem}
+.project:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.6);
+}
+
+/* actions */
+.actions{
+  margin-top:1rem;
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  padding:.6rem .9rem;
+  border-radius:9px;
+  font-weight:700;
+  font-size:0.95rem;
+  text-decoration:none;
+  color:var(--bg);
+  background:var(--crimson);
+  border:1px solid rgba(0,0,0,0.12);
+  transition:transform .12s, background .12s;
+}
+.btn svg {width:18px;height:18px;display:block}
+.btn:hover{transform:translateY(-3px);background:var(--crimson-2)}
+
+/* right column (sidebar) */
+.sidebar{
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  position:sticky;
+  top:1.25rem;
+}
+.card{
+  padding:1rem;
+  border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border:1px solid var(--border);
+}
+.profile{
+  display:flex;
+  gap:0.9rem;
+  align-items:center;
+}
+.avatar{
+  width:68px;height:68px;border-radius:10px;background:linear-gradient(135deg,var(--crimson),var(--crimson-2));
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:white;font-family:"Fira Mono";font-size:20px;
+}
+.profile h3{margin:0;font-size:1rem}
+.profile p{margin:4px 0 0;color:var(--muted);font-size:0.85rem}
+
+/* small link list */
+.socials{display:flex;gap:.6rem;margin-top:.6rem;flex-wrap:wrap}
+.icon-link{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:8px;
+  background:rgba(255,255,255,0.01);
+  border:1px solid rgba(255,255,255,0.02);
+  text-decoration:none;color:var(--text);font-weight:700;
+}
+.icon-link svg{width:18px;height:18px}
+
+/* footer */
+.footer{
+  grid-column:1/-1;
+  text-align:center;
+  color:var(--muted);
+  font-size:0.85rem;
+  padding:1rem 0 0 0;
+}
+
+/* subtle reduced-motion */
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
 }
 </style>
 </head>
 <body>
-<div class="container">
-  <header>
-    <h1>team j00rkidd</h1>
-    <p>roblox exploit dev · lua backdoors · script dev</p>
-    <nav>
-      <a href="#about">about</a>
-      <a href="#projects">projects</a>
-      <a href="https://discord.gg/4tGJnwmYd5" target="_blank">discord</a>
-      <a href="https://www.youtube.com/@teamj00rkidd" target="_blank">youtube</a>
-    </nav>
-  </header>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <section id="about">
-    <h2>about me</h2>
-    <p>
-      I build backdoors, custom scripts, and tools inside Roblox Studio. No fluff. Just code. My work’s all self-made and always evolving.
-    </p>
-  </section>
+  <main id="main" class="container" role="main" aria-labelledby="site-title">
+    <header class="header" role="banner">
+      <div class="logo" aria-hidden="true">J00R</div>
+      <div class="header-main">
+        <h1 id="site-title">team j00rkidd</h1>
+        <p>roblox exploit dev · lua backdoors · script dev — self-made tools, no fluff.</p>
+        <nav class="nav" aria-label="Primary">
+          <a href="#about">about</a>
+          <a href="#projects">projects</a>
+          <a href="https://j00rkidd.xyz/projects.html">projects (full)</a>
+          <a href="https://discord.gg/4tGJnwmYd5" target="_blank" rel="noopener">discord</a>
+          <a href="https://www.youtube.com/@teamj00rkidd" target="_blank" rel="noopener">youtube</a>
+        </nav>
+      </div>
+    </header>
 
-  <section id="projects">
-    <h2>recent work</h2>
-    <ul class="features">
-      <li>lua backdoor loader — stealthy, reliable</li>
-      <li>custom script library — organized & versioned</li>
-      <li>anti‑detection utilities & exploit bypass tools</li>
-    </ul>
-    <a class="btn" href="https://www.youtube.com/@teamj00rkidd" target="_blank">see on youtube</a>
-  </section>
+    <!-- left column -->
+    <section class="panel about" id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">about me</h2>
+      <p>I build backdoors, custom scripts, and tools inside Roblox Studio. Self-made, evolving, and focused on effectiveness — organized with versioning and release notes. If you want demos or protected sandboxes, check the projects and YouTube links.</p>
 
-  <footer>
-    &copy; 2025 team j00rkidd
-  </footer>
-</div>
+      <div style="margin-top:1rem">
+        <h3 style="margin:0 0 .5rem 0">skills</h3>
+        <ul style="list-style:none;padding-left:0;color:var(--muted);margin:0">
+          <li>• Lua → modules, loaders, persistent backdoors</li>
+          <li>• Exploit bypass & anti-detection techniques</li>
+          <li>• Script libraries, version control & packaging</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">recent work</h2>
+
+      <div class="projects-grid" role="list">
+        <article class="project" role="listitem" aria-labelledby="p1">
+          <h3 id="p1">lua backdoor loader</h3>
+          <p>Stealthy loader that handles persistence, auto-updates, and staged payloads.</p>
+        </article>
+
+        <article class="project" role="listitem" aria-labelledby="p2">
+          <h3 id="p2">custom script library</h3>
+          <p>Organized, versioned modules with clear APIs for quick injection.</p>
+        </article>
+
+        <article class="project" role="listitem" aria-labelledby="p3">
+          <h3 id="p3">anti-detection utilities</h3>
+          <p>Heuristics to reduce detection footprint and adaptive timing controls.</p>
+        </article>
+
+        <article class="project" role="listitem" aria-labelledby="p4">
+          <h3 id="p4">dev tools & monitors</h3>
+          <p>CLI helpers, logger collectors, and release pipelines for dev speed.</p>
+        </article>
+      </div>
+
+      <div class="actions" aria-hidden="false">
+        <a class="btn" href="https://www.youtube.com/@teamj00rkidd" target="_blank" rel="noopener">
+          <!-- simple play icon -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 3v18l15-9L5 3z" fill="white"/>
+          </svg>
+          see on youtube
+        </a>
+
+        <a class="btn" href="mailto:team@j00rkidd.xyz">
+          <!-- mail icon -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-11z" fill="white" opacity=".06"/>
+            <path d="M4 7.2l8 5 8-5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          contact
+        </a>
+      </div>
+    </section>
+
+    <!-- right column / sidebar -->
+    <aside class="sidebar" aria-label="Sidebar">
+      <div class="card profile" role="region" aria-labelledby="profile-name">
+        <div class="avatar" aria-hidden="true">JK</div>
+        <div>
+          <h3 id="profile-name">team j00rkidd</h3>
+          <p>exploit dev · lua fanatic</p>
+          <div class="socials" aria-hidden="false">
+            <a class="icon-link" href="https://discord.gg/4tGJnwmYd5" target="_blank" rel="noopener" aria-label="Discord invite">
+              <!-- discord SVG simplified -->
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 10.5a1.3 1.3 0 11-2.6 0 1.3 1.3 0 012.6 0zm9 0a1.3 1.3 0 11-2.6 0 1.3 1.3 0 012.6 0z" fill="white"/></svg>
+            </a>
+            <a class="icon-link" href="https://www.youtube.com/@teamj00rkidd" target="_blank" rel="noopener" aria-label="YouTube channel">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 7.2v9.6c0 1 .8 1.8 1.8 1.8h14.4c1 0 1.8-.8 1.8-1.8V7.2c0-1-.8-1.8-1.8-1.8H4.8C3.8 5.4 3 6.2 3 7.2z" fill="white" opacity=".08"/><path d="M10 9l6 3-6 3V9z" fill="white"/></svg>
+            </a>
+            <a class="icon-link" href="https://j00rkidd.xyz" aria-label="Website home">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.0" opacity=".14"/><path d="M7 12h10" stroke="white" stroke-width="1.3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" role="region" aria-labelledby="quick-links">
+        <h4 id="quick-links" style="margin:0 0 .5rem 0">quick links</h4>
+        <nav style="display:flex;flex-direction:column;gap:.5rem">
+          <a class="nav" href="#projects" style="padding:0">→ projects page</a>
+          <a class="nav" href="https://j00rkidd.xyz/projects.html" target="_blank" rel="noopener" style="padding:0">→ full projects</a>
+          <a class="nav" href="https://www.youtube.com/@teamj00rkidd" target="_blank" rel="noopener" style="padding:0">→ youtube</a>
+        </nav>
+      </div>
+
+      <div class="card" role="region" aria-labelledby="notes">
+        <h4 id="notes" style="margin:0 0 .5rem 0">notes</h4>
+        <p style="margin:0;color:var(--muted);font-size:.9rem">Replace <code>preview.png</code> at the site root with a 1200×630 preview for nice social embeds. Add a favicon next to the file if you want a custom tab icon.</p>
+      </div>
+    </aside>
+
+    <div class="footer" role="contentinfo">
+      &copy; <span id="year"></span> team j00rkidd — made for testing & demos
+    </div>
+  </main>
+
+<script>
+  // small script: inject current year and respect reduced motion
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // small accessibility: focus outlines for keyboard users
+  (function(){
+    function handleFirstTab(e){
+      if(e.key === 'Tab'){
+        document.documentElement.classList.add('user-is-tabbing');
+        window.removeEventListener('keydown', handleFirstTab);
+      }
+    }
+    window.addEventListener('keydown', handleFirstTab);
+  })();
+</script>
 </body>
 </html>
