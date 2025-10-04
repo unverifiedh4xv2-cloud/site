@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="j00rkid's Cursed Executor - Unleash hellish Roblox exploits. Haxin' i'z not a crime!">
+  <meta name="description" content="j00rkid's Cursed Executor - Execute ANY exploits with NO ToS. Haxin' i'z not a crime!">
   <title>j00rkid - Cursed Executor</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -451,11 +451,12 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand neon-text glitch-text" href="#">
+      <a class="navbar-brand neon-text glitch-text" href="https://j00rkidd.xyz">
         <i class="bi bi-skull" style="color: var(--accent-neon);"></i>
         Cursed Executor
       </a>
       <div class="d-flex align-items-center gap-3">
+        <a href="https://j00rkidd.xyz" class="text-lg horror-text hover:text-red-500 transition">Back to Lair</a>
         <span class="badge px-3 py-2 horror-text blood-drip" style="background: var(--danger); font-size: clamp(0.7rem, 1.5vw, 0.8rem);">Infested</span>
         <i class="bi bi-gear-fill text-muted" style="cursor: pointer; font-size: clamp(1rem, 2vw, 1.2rem);"></i>
       </div>
@@ -733,16 +734,11 @@ print('Curse unleashed!')"
     }
 
     function selectGame(gameName, gameUrl, element) {
-      // Open game URL in a new tab
       window.open(gameUrl, '_blank');
-      
-      // Update active game in UI
       document.querySelectorAll('.game-item').forEach(item => {
         item.classList.remove('active');
       });
-      
       element.classList.add('active');
-      
       showNotification(`Haunted realm opened: ${gameName} (${gameUrl})`, 'info');
     }
 
